@@ -347,9 +347,7 @@ const DRIVE_API_KEY = "AIzaSyA8HzNgznfUHjDLRcKiEJdRsVcbL5DsNik";
 const DRIVE_FOLDER_ID = "1eJbvIcny-UfhRuZax-FXg6SZM2bj-uX1";
 
 async function loadGoogleDriveGallery() {
-
     const photoGrid = document.getElementById("photoGrid");
-
     if (!photoGrid) return;
 
     photoGrid.innerHTML = "<p>Loading photos...</p>";
@@ -358,85 +356,74 @@ async function loadGoogleDriveGallery() {
         `'${DRIVE_FOLDER_ID}' in parents and trashed = false and mimeType contains 'image/'`;
 
     const url =
-        "https://www.googleapis.com/drive/v3/files" +
-        "?q=" + encodeURIComponent(query) +
-        "&fields=files(id,name,mimeType,thumbnailLink,webViewLink)" +
-        "&pageSize=100" +
-        "&key=" + encodeURIComponent(DRIVE_API_KEY);
+        `https://www.googleapis.com/drive/v3/files` +
+        `?q=${encodeURIComponent(query)}` +
+        `&fields=files(id,name,mimeType,thumbnailLink,webContentLink,webViewLink)` +
+        `&pageSize=100` +
+        `&key=${encodeURIComponent(DRIVE_API_KEY)}`;
 
     try {
-
         const response = await fetch(url);
         const data = await response.json();
 
-        console.log("Google Drive response:", data);
-
         if (!response.ok) {
-            throw new Error(
-                data.error?.message ||
-                "Google Drive API Error"
-            );
+            throw new Error(data.error?.message || "Google Drive API Error");
         }
 
         photoGrid.innerHTML = "";
 
         if (!data.files || data.files.length === 0) {
-
-            photoGrid.innerHTML =
-                "<p>No photos found in Google Drive folder.</p>";
-
+            photoGrid.innerHTML = "<p>No photos found.</p>";
             return;
         }
 
-        data.files.forEach(function(file) {
+        data.files.forEach(file => {
 
-            const card =
-                document.createElement("div");
-
+            const card = document.createElement("div");
             card.className = "photo-card";
 
-            const img =
-                document.createElement("img");
+            // Full-resolution image link
+            const imageLink =
+                `https://drive.google.com/uc?export=view&id=${file.id}`;
 
-            /*
-             * thumbnailLink sometimes needs additional
-             * access permissions, so use Google's thumbnail
-             * endpoint with the file ID.
-             */
-
-            img.src =
-                "https://drive.google.com/thumbnail?id=" +
-                file.id +
-                "&sz=w1000";
-
+            // Image
+            const img = document.createElement("img");
+            img.src = file.thumbnailLink;
             img.alt = file.name;
-
             img.loading = "lazy";
 
+            // Click image → full resolution
+            img.onclick = () => {
+                window.open(imageLink, "_blank");
+            };
+
+            // Download button
+            const downloadBtn = document.createElement("a");
+            downloadBtn.href =
+                file.webContentLink ||
+                `https://drive.google.com/uc?export=download&id=${file.id}`;
+
+            downloadBtn.target = "_blank";
+            downloadBtn.className = "download-btn";
+            downloadBtn.textContent = "⬇ Download";
+
             card.appendChild(img);
+            card.appendChild(downloadBtn);
 
             photoGrid.appendChild(card);
-
         });
 
     } catch (error) {
 
-        console.error(
-            "Google Drive Gallery Error:",
-            error
-        );
+        console.error("Gallery Error:", error);
 
         photoGrid.innerHTML = `
-            <div class="gallery-error">
-                <h3>Gallery could not be loaded</h3>
+            <div>
+                <p><strong>Gallery could not be loaded.</strong></p>
                 <p>${error.message}</p>
             </div>
         `;
     }
 }
 
-
-document.addEventListener(
-    "DOMContentLoaded",
-    loadGoogleDriveGallery
-);
+document.addEventListener("DOMContentLoaded", loadGoogleDriveGallery);

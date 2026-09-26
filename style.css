@@ -1545,3 +1545,38 @@ footer {
         grid-template-columns: 1fr;
     }
 }
+.photo-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    background: #ddd;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+}
+
+.photo-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    display: block;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.photo-card img:hover {
+    transform: scale(1.05);
+}
+
+.download-btn {
+    display: block;
+    background: #0b1f3a;
+    color: white;
+    text-align: center;
+    padding: 12px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.download-btn:hover {
+    background: #d4af37;
+    color: #111;
+}
