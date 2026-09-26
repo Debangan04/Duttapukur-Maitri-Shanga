@@ -339,15 +339,18 @@ function changeHeroImage() {
 
 // Change image every 10 seconds
 setInterval(changeHeroImage, 10000);
+
 // ===============================
-// GOOGLE DRIVE PHOTO GALLERY
+// GOOGLE DRIVE GALLERY
 // ===============================
 
 const DRIVE_API_KEY = "AIzaSyA8HzNgznfUHjDLRcKiEJdRsVcbL5DsNik";
 const DRIVE_FOLDER_ID = "1eJbvIcny-UfhRuZax-FXg6SZM2bj-uX1";
 
 async function loadGoogleDriveGallery() {
+
     const photoGrid = document.getElementById("photoGrid");
+
     if (!photoGrid) return;
 
     photoGrid.innerHTML = "<p>Loading photos...</p>";
@@ -356,59 +359,83 @@ async function loadGoogleDriveGallery() {
         `'${DRIVE_FOLDER_ID}' in parents and trashed = false and mimeType contains 'image/'`;
 
     const url =
-        `https://www.googleapis.com/drive/v3/files` +
-        `?q=${encodeURIComponent(query)}` +
-        `&fields=files(id,name,mimeType,thumbnailLink,webContentLink,webViewLink)` +
-        `&pageSize=100` +
-        `&key=${encodeURIComponent(DRIVE_API_KEY)}`;
+        "https://www.googleapis.com/drive/v3/files" +
+        "?q=" + encodeURIComponent(query) +
+        "&fields=files(id,name,mimeType,thumbnailLink,webContentLink,webViewLink)" +
+        "&pageSize=100" +
+        "&key=" + encodeURIComponent(DRIVE_API_KEY);
 
     try {
+
         const response = await fetch(url);
         const data = await response.json();
 
+        console.log("Google Drive:", data);
+
         if (!response.ok) {
-            throw new Error(data.error?.message || "Google Drive API Error");
+            throw new Error(
+                data.error?.message || "Google Drive API Error"
+            );
         }
 
         photoGrid.innerHTML = "";
 
         if (!data.files || data.files.length === 0) {
-            photoGrid.innerHTML = "<p>No photos found.</p>";
+
+            photoGrid.innerHTML =
+                "<p>No photos found in Google Drive.</p>";
+
             return;
         }
 
         data.files.forEach(file => {
 
+            // Card
             const card = document.createElement("div");
             card.className = "photo-card";
 
-            // Full-resolution image link
-            const imageLink =
-                `https://drive.google.com/uc?export=view&id=${file.id}`;
+            // Full image link
+            const fullImage =
+                "https://drive.google.com/uc?export=view&id=" + file.id;
 
             // Image
             const img = document.createElement("img");
+
             img.src = file.thumbnailLink;
             img.alt = file.name;
             img.loading = "lazy";
 
-            // Click image → full resolution
-            img.onclick = () => {
-                window.open(imageLink, "_blank");
-            };
+            // CLICK IMAGE = FULL IMAGE
+            img.addEventListener("click", function () {
+                window.open(fullImage, "_blank");
+            });
 
             // Download button
-            const downloadBtn = document.createElement("a");
-            downloadBtn.href =
-                file.webContentLink ||
-                `https://drive.google.com/uc?export=download&id=${file.id}`;
+            const downloadButton =
+                document.createElement("a");
 
-            downloadBtn.target = "_blank";
-            downloadBtn.className = "download-btn";
-            downloadBtn.textContent = "⬇ Download";
+            downloadButton.className = "download-btn";
+
+            downloadButton.textContent = "⬇ Download";
+
+            if (file.webContentLink) {
+
+                downloadButton.href =
+                    file.webContentLink;
+
+                downloadButton.target = "_blank";
+
+            } else {
+
+                downloadButton.href =
+                    "https://drive.google.com/uc?export=download&id=" +
+                    file.id;
+
+                downloadButton.target = "_blank";
+            }
 
             card.appendChild(img);
-            card.appendChild(downloadBtn);
+            card.appendChild(downloadButton);
 
             photoGrid.appendChild(card);
         });
@@ -418,12 +445,15 @@ async function loadGoogleDriveGallery() {
         console.error("Gallery Error:", error);
 
         photoGrid.innerHTML = `
-            <div>
-                <p><strong>Gallery could not be loaded.</strong></p>
+            <div class="gallery-error">
+                <h3>Gallery could not be loaded</h3>
                 <p>${error.message}</p>
             </div>
         `;
     }
 }
 
-document.addEventListener("DOMContentLoaded", loadGoogleDriveGallery);
+document.addEventListener(
+    "DOMContentLoaded",
+    loadGoogleDriveGallery
+);
