@@ -343,7 +343,7 @@ setInterval(changeHeroImage, 10000);
 // GOOGLE DRIVE PHOTO GALLERY
 // ===============================
 
-const DRIVE_API_KEY = "AIzaSyDf6OTMw-EixTb97Nr_Udjhm-x-DCJqy14";
+const DRIVE_API_KEY = "AIzaSyA8HzNgznfUHjDLRcKiEJdRsVcbL5DsNik";
 const DRIVE_FOLDER_ID = "1eJbvIcny-UfhRuZax-FXg6SZM2bj-uX1";
 
 async function loadGoogleDriveGallery() {
@@ -358,11 +358,11 @@ async function loadGoogleDriveGallery() {
         `'${DRIVE_FOLDER_ID}' in parents and trashed = false and mimeType contains 'image/'`;
 
     const url =
-        `https://www.googleapis.com/drive/v3/files` +
-        `?q=${encodeURIComponent(query)}` +
-        `&fields=files(id,name,mimeType,thumbnailLink)` +
-        `&pageSize=100` +
-        `&key=${encodeURIComponent(DRIVE_API_KEY)}`;
+        "https://www.googleapis.com/drive/v3/files" +
+        "?q=" + encodeURIComponent(query) +
+        "&fields=files(id,name,mimeType,thumbnailLink,webViewLink)" +
+        "&pageSize=100" +
+        "&key=" + encodeURIComponent(DRIVE_API_KEY);
 
     try {
 
@@ -373,44 +373,70 @@ async function loadGoogleDriveGallery() {
 
         if (!response.ok) {
             throw new Error(
-                data.error?.message || "Google Drive API Error"
+                data.error?.message ||
+                "Google Drive API Error"
             );
         }
 
         photoGrid.innerHTML = "";
 
         if (!data.files || data.files.length === 0) {
+
             photoGrid.innerHTML =
                 "<p>No photos found in Google Drive folder.</p>";
+
             return;
         }
 
-        data.files.forEach(file => {
+        data.files.forEach(function(file) {
 
-            const card = document.createElement("div");
+            const card =
+                document.createElement("div");
+
             card.className = "photo-card";
 
-            const img = document.createElement("img");
+            const img =
+                document.createElement("img");
 
-            img.src = file.thumbnailLink;
+            /*
+             * thumbnailLink sometimes needs additional
+             * access permissions, so use Google's thumbnail
+             * endpoint with the file ID.
+             */
+
+            img.src =
+                "https://drive.google.com/thumbnail?id=" +
+                file.id +
+                "&sz=w1000";
+
             img.alt = file.name;
+
             img.loading = "lazy";
 
             card.appendChild(img);
+
             photoGrid.appendChild(card);
+
         });
 
     } catch (error) {
 
-        console.error("Gallery Error:", error);
+        console.error(
+            "Google Drive Gallery Error:",
+            error
+        );
 
         photoGrid.innerHTML = `
-            <div>
-                <p><strong>Gallery could not be loaded.</strong></p>
+            <div class="gallery-error">
+                <h3>Gallery could not be loaded</h3>
                 <p>${error.message}</p>
             </div>
         `;
     }
 }
 
-document.addEventListener("DOMContentLoaded", loadGoogleDriveGallery);
+
+document.addEventListener(
+    "DOMContentLoaded",
+    loadGoogleDriveGallery
+);
