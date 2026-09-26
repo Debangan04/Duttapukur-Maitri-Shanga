@@ -350,31 +350,28 @@ async function loadGoogleDriveGallery() {
 
     const photoGrid = document.getElementById("photoGrid");
 
-    // gallery.html-এ photoGrid না থাকলে কিছু করবে না
     if (!photoGrid) return;
 
     photoGrid.innerHTML = "<p>Loading photos...</p>";
 
     const query =
-        `'${DRIVE_FOLDER_ID}' in parents ` +
-        `and trashed = false ` +
-        `and mimeType contains 'image/'`;
+        `'${DRIVE_FOLDER_ID}' in parents and trashed = false and mimeType contains 'image/'`;
 
     const url =
-        "https://www.googleapis.com/drive/v3/files" +
-        "?q=" + encodeURIComponent(query) +
-        "&fields=files(id,name,mimeType,thumbnailLink,webViewLink)" +
-        "&pageSize=100" +
-        "&orderBy=createdTime desc" +
-        "&key=" + encodeURIComponent(DRIVE_API_KEY);
+        `https://www.googleapis.com/drive/v3/files` +
+        `?q=${encodeURIComponent(query)}` +
+        `&fields=files(id,name,mimeType,thumbnailLink)` +
+        `&pageSize=100` +
+        `&key=${encodeURIComponent(DRIVE_API_KEY)}`;
 
     try {
 
         const response = await fetch(url);
         const data = await response.json();
 
+        console.log("Google Drive response:", data);
+
         if (!response.ok) {
-            console.error("Google Drive API Error:", data);
             throw new Error(
                 data.error?.message || "Google Drive API Error"
             );
@@ -383,10 +380,8 @@ async function loadGoogleDriveGallery() {
         photoGrid.innerHTML = "";
 
         if (!data.files || data.files.length === 0) {
-
             photoGrid.innerHTML =
-                "<p>No photos found in the Gallery folder.</p>";
-
+                "<p>No photos found in Google Drive folder.</p>";
             return;
         }
 
@@ -395,14 +390,13 @@ async function loadGoogleDriveGallery() {
             const card = document.createElement("div");
             card.className = "photo-card";
 
-            const image = document.createElement("img");
+            const img = document.createElement("img");
 
-            image.src = file.thumbnailLink;
-            image.alt = file.name;
-            image.loading = "lazy";
+            img.src = file.thumbnailLink;
+            img.alt = file.name;
+            img.loading = "lazy";
 
-            card.appendChild(image);
-
+            card.appendChild(img);
             photoGrid.appendChild(card);
         });
 
@@ -411,16 +405,12 @@ async function loadGoogleDriveGallery() {
         console.error("Gallery Error:", error);
 
         photoGrid.innerHTML = `
-            <div class="gallery-error">
-                <p>Gallery could not be loaded.</p>
-                <small>${error.message}</small>
+            <div>
+                <p><strong>Gallery could not be loaded.</strong></p>
+                <p>${error.message}</p>
             </div>
         `;
     }
 }
 
-
-// Gallery load
-document.addEventListener("DOMContentLoaded", function () {
-    loadGoogleDriveGallery();
-});
+document.addEventListener("DOMContentLoaded", loadGoogleDriveGallery);
