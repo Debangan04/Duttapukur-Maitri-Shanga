@@ -1250,3 +1250,161 @@ footer {
     }
 
 }
+/* =========================
+   COMMITTEE
+========================= */
+
+.committee {
+    padding: 80px 5%;
+    background: #f7f9fc;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.section-title span {
+    color: #d99c00;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 3px;
+}
+
+.section-title h2 {
+    margin: 10px 0;
+    font-family: "Playfair Display", serif;
+    font-size: 45px;
+    color: #062b52;
+}
+
+.section-title p {
+    color: #66788a;
+    font-size: 17px;
+}
+
+
+/* Member Grid */
+
+.committee-grid {
+    max-width: 1200px;
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 25px;
+}
+
+
+/* Member Card */
+
+.member-card {
+    background: white;
+
+    border-radius: 15px;
+
+    overflow: hidden;
+
+    text-align: center;
+
+    box-shadow:
+        0 8px 25px
+        rgba(0, 0, 0, 0.08);
+
+    transition: .3s;
+}
+
+
+.member-card:hover {
+    transform:
+        translateY(-8px);
+
+    box-shadow:
+        0 15px 35px
+        rgba(0, 0, 0, 0.14);
+}
+
+
+/* Member Image */
+
+.member-image {
+    width: 100%;
+    height: 270px;
+
+    overflow: hidden;
+
+    background: #e9eef4;
+}
+
+
+.member-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: .4s;
+}
+
+
+.member-card:hover
+.member-image img {
+    transform: scale(1.05);
+}
+
+
+/* Member Information */
+
+.member-info {
+    padding: 20px 10px 25px;
+}
+
+
+.member-info h3 {
+    font-size: 20px;
+
+    color: #062b52;
+
+    margin-bottom: 7px;
+}
+
+
+.member-info span {
+    color: #d99c00;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+}
+
+
+/* Mobile */
+
+@media (max-width: 900px) {
+
+    .committee-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 520px) {
+
+    .committee-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .section-title h2 {
+        font-size: 34px;
+    }
+
+}
