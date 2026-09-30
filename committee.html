@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Managing Committee | Duttapukur Maitri Sangha</title>
+
+    <style>
+
+        /* =========================
+           RESET
+        ========================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7fb;
+            color: #102f4f;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+
+        /* =========================
+           TOP HEADER
+        ========================= */
+
+        .cm-header {
+            background: #ffffff;
+            min-height: 105px;
+
+            display: flex;
+            align-items: center;
+
+            padding: 12px 6%;
+
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .cm-logo {
+            width: 82px;
+            height: 82px;
+
+            object-fit: contain;
+
+            margin-right: 18px;
+        }
+
+        .cm-brand h2 {
+            font-size: 25px;
+            color: #07345b;
+
+            margin-bottom: 5px;
+        }
+
+        .cm-brand p {
+            font-size: 13px;
+            color: #8b6a18;
+            letter-spacing: 1.5px;
+        }
+
+
+        /* =========================
+           NAVIGATION
+        ========================= */
+
+        .cm-nav {
+            background: #07345b;
+
+            min-height: 58px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 5px;
+
+            padding: 0 20px;
+        }
+
+        .cm-nav a {
+            color: #ffffff;
+
+            padding: 20px 15px;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            transition: 0.3s;
+        }
+
+        .cm-nav a:hover,
+        .cm-nav a.active {
+            background: #c99b20;
+            color: #ffffff;
+        }
+
+
+        /* =========================
+           PAGE HERO
+        ========================= */
+
+        .cm-hero {
+            text-align: center;
+
+            padding: 75px 20px 65px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f8fafc,
+                    #eef3f8
+                );
+        }
+
+        .cm-label {
+            color: #c99b20;
+
+            font-size: 14px;
+            font-weight: 800;
+
+            letter-spacing: 5px;
+
+            margin-bottom: 15px;
+        }
+
+        .cm-hero h1 {
+            font-family: Georgia, "Times New Roman", serif;
+
+            color: #07345b;
+
+            font-size: clamp(38px, 5vw, 62px);
+
+            margin-bottom: 15px;
+        }
+
+        .cm-hero p {
+            color: #718096;
+
+            font-size: 18px;
+
+            max-width: 650px;
+
+            margin: auto;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           COMMITTEE AREA
+        ========================= */
+
+        .cm-members {
+            max-width: 1200px;
+
+            margin: auto;
+
+            padding: 65px 25px 80px;
+        }
+
+
+        /* =========================
+           CARDS GRID
+        ========================= */
+
+        .cm-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+
+            gap: 28px;
+        }
+
+
+        /* =========================
+           MEMBER CARD
+        ========================= */
+
+        .cm-card {
+            background: #ffffff;
+
+            border-radius: 18px;
+
+            overflow: hidden;
+
+            text-align: center;
+
+            border: 1px solid #e6ebf1;
+
+            box-shadow:
+                0 8px 25px rgba(20, 50, 80, 0.08);
+
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease;
+        }
+
+        .cm-card:hover {
+            transform: translateY(-8px);
+
+            box-shadow:
+                0 18px 40px rgba(20, 50, 80, 0.15);
+        }
+
+
+        /* =========================
+           PHOTO
+        ========================= */
+
+        .cm-photo {
+            width: 100%;
+            height: 310px;
+
+            background: #e9eef4;
+
+            overflow: hidden;
+        }
+
+        .cm-photo img {
+            width: 100%;
+            height: 100%;
+
+            display: block;
+
+            object-fit: cover;
+        }
+
+
+        /* =========================
+           CARD TEXT
+        ========================= */
+
+        .cm-info {
+            padding: 22px 15px 25px;
+        }
+
+        .cm-info h3 {
+            color: #07345b;
+
+            font-family: Georgia, "Times New Roman", serif;
+
+            font-size: 24px;
+
+            margin-bottom: 8px;
+        }
+
+        .cm-info p {
+            color: #7a8795;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =========================
+           BACK BUTTON
+        ========================= */
+
+        .cm-back {
+            text-align: center;
+
+            padding-bottom: 70px;
+        }
+
+        .cm-back a {
+            display: inline-block;
+
+            background: #07345b;
+
+            color: #ffffff;
+
+            padding: 14px 28px;
+
+            border-radius: 30px;
+
+            font-weight: 700;
+
+            transition: 0.3s;
+        }
+
+        .cm-back a:hover {
+            background: #c99b20;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .cm-footer {
+            background: #07345b;
+
+            color: #ffffff;
+
+            text-align: center;
+
+            padding: 25px 15px;
+
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           TABLET
+        ========================= */
+
+        @media (max-width: 1000px) {
+
+            .cm-grid {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 650px) {
+
+            .cm-header {
+                min-height: 85px;
+
+                padding: 10px 18px;
+            }
+
+            .cm-logo {
+                width: 62px;
+                height: 62px;
+
+                margin-right: 12px;
+            }
+
+            .cm-brand h2 {
+                font-size: 18px;
+            }
+
+            .cm-brand p {
+                font-size: 9px;
+                letter-spacing: 1px;
+            }
+
+
+            .cm-nav {
+                justify-content: flex-start;
+
+                overflow-x: auto;
+
+                gap: 0;
+
+                padding: 0 8px;
+            }
+
+            .cm-nav a {
+                white-space: nowrap;
+
+                padding: 17px 11px;
+
+                font-size: 12px;
+            }
+
+
+            .cm-hero {
+                padding: 55px 18px 45px;
+            }
+
+            .cm-hero h1 {
+                font-size: 38px;
+            }
+
+            .cm-hero p {
+                font-size: 16px;
+            }
+
+
+            .cm-members {
+                padding: 40px 18px 60px;
+            }
+
+
+            .cm-grid {
+                grid-template-columns: 1fr;
+
+                gap: 25px;
+            }
+
+
+            .cm-photo {
+                height: 360px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- HEADER -->
+
+    <header class="cm-header">
+
+        <img
+            src="images/club-logo.png"
+            alt="Duttapukur Maitri Sangha Logo"
+            class="cm-logo"
+        >
+
+        <div class="cm-brand">
+
+            <h2>
+                Duttapukur Maitri Sangha
+            </h2>
+
+            <p>
+                UNITY • FRIENDSHIP • CULTURE • COMMUNITY SERVICE
+            </p>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- NAVIGATION -->
+
+    <nav class="cm-nav">
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="index.html#about">
+            About
+        </a>
+
+        <a href="index.html#activities">
+            Activities
+        </a>
+
+        <a href="index.html#events">
+            Events
+        </a>
+
+        <a href="gallery.html">
+            Gallery
+        </a>
+
+        <a href="committee.html" class="active">
+            Committee
+        </a>
+
+        <a href="index.html#notices">
+            Notices
+        </a>
+
+        <a href="index.html#contact">
+            Contact
+        </a>
+
+    </nav>
+
+
+
+    <!-- PAGE TITLE -->
+
+    <section class="cm-hero">
+
+        <div class="cm-label">
+            OUR TEAM
+        </div>
+
+        <h1>
+            Managing Committee
+        </h1>
+
+        <p>
+            Meet the dedicated members of
+            Duttapukur Maitri Sangha.
+        </p>
+
+    </section>
+
+
+
+    <!-- MEMBERS -->
+
+    <section class="cm-members">
+
+        <div class="cm-grid">
+
+
+            <!-- PRESIDENT -->
+
+            <div class="cm-card">
+
+                <div class="cm-photo">
+
+                    <img
+                        src="images/president.jpg"
+                        alt="President"
+                    >
+
+                </div>
+
+                <div class="cm-info">
+
+                    <h3>
+                        Shri Noni Gopal Das
+                    </h3>
+                    <h4>
+                        phone number: +91 **********
+                    </h4>
+
+                    <span>
+                        President
+                    </span>
+
+                </div>
+
+            </div>
+
+            <!--VICE PRESIDENT -->
+
+            <div class="cm-card">
+
+                <div class="cm-photo">
+
+                    <img
+                        src="images/vice-president.jpg"
+                        alt="Vice President"
+                    >
+
+                </div>
+
+                <div class="cm-info">
+
+                    <h3>
+                        Dr. Monoj Ghosh
+                    </h3>
+                    <h4>
+                        phone number: +91 9830548365 
+                    </h4>
+
+                    <span>
+                        Vice President
+                    </span>
+
+                </div>
+
+            </div>
+
+            <!-- SECRETARY -->
+
+            <div class="cm-card">
+
+                <div class="cm-photo">
+
+                    <img
+                        src="images/secretary.jpg"
+                        alt="Secretary"
+                    >
+
+                </div>
+
+                <div class="cm-info">
+
+                    <h3>
+                       Mr. Avijit Das
+                    </h3>
+                    <h4>
+                        phone number: +91 9038658104
+                    </h4>
+
+
+                    <span>
+                        Secretary
+                    </span>
+
+                </div>
+
+            </div>
+
+            <!-- JOINT SECRETARY -->
+
+            <div class="cm-card">
+
+                <div class="cm-photo">
+
+                    <img
+                        src="images/joint-secretary.jpg"
+                        alt="Joint Secretary"
+                    >
+
+                </div>
+
+                <div class="cm-info">
+
+                    <h3>
+                        Mr. Bapan Biswas
+                    </h3>
+                    <h4>
+                        phone number: +91 9874258304
+                    </h4>
+
+                    <span>
+                        Joint Secretary
+                    </span>
+
+                </div>
+
+            </div>
+
+            <!-- TREASURER-1 -->
+
+            <div class="cm-card">
+
+                <div class="cm-photo">
+
+                    <img
+                        src="images/treasurer-1.jpg"
+                        alt="Treasurer-1"
+                    >
+
+                </div>
+
+                <div class="cm-info">
+
+                    <h3>
+                        Mr. Pritam Chakraborty 
+                    </h3>
+                    <h4>
+                        phone number: +91 8697714745
+                    </h4>
+
+                    <span>
+                        Treasurer-1
+                    </span>
+
+                </div>
+
+            </div>
+
+           <!-- TREASURER-2 -->
+
+            <div class="cm-card">
+
+                <div class="cm-photo">
+
+                    <img
+                        src="images/treasurer-2.jpg"
+                        alt="Treasurer-2"
+                    >
+
+                </div>
+
+                <div class="cm-info">
+
+                    <h3>
+                        Mr. Monojit Das
+                    </h3>
+                    <h4>
+                        phone number: +91 9903314217
+                    </h4>
+
+                    <span>
+                        Treasurer-2
+                    </span>
+
+                </div>
+
+            </div>
+
+            <!-- CULTURAL SECRETARY-1 -->
+
+            <div class="cm-card">
+
+                <div class="cm-photo">
+
+                    <img
+                        src="images/cultural-secretary-1.jpg"
+                        alt="Cultural Secretary-1"
+                    >
+
+                </div>
+
+                <div class="cm-info">
+
+                    <h3>
+                        Mr. Sudip Das
+                    </h3>
+                    <h4>
+                        phone number: +91 7003652353
+                    </h4>
+
+                    <span>
+                        Cultural Secretary-1
+                    </span>
+
+                </div>
+
+            </div>
+
+            <!-- CULTURAL SECRETARY-2 -->
+
+            <div class="cm-card">
+
+                <div class="cm-photo">
+
+                    <img
+                        src="images/cultural-secretary-2.jpg"
+                        alt="Cultural Secretary-2"
+                    >
+
+                </div>
+
+                <div class="cm-info">
+
+                    <h3>
+                        Mr. Atanu Bhattacharya
+                    </h3>
+                    <h4>
+                        phone number: +91 9748797692
+                    </h4>
+
+                    <span>
+                        Cultural Secretary-2
+                    </span>
+
+                </div>
+
+            </div>
+
+            <!-- GAME SECRETARY -->
+
+            <div class="cm-card">
+
+                <div class="cm-photo">
+
+                    <img
+                        src="images/game-secretary.jpg"
+                        alt="Game Secretary"
+                    >
+
+                </div>
+
+                <div class="cm-info">
+
+                    <h3>
+                        Mr. Sadhan Chakraborty
+                    </h3>
+                    <h4>
+                        phone number: +91 7439042291
+                    </h4>
+
+                    <span>
+                        Game Secretary-1
+                    </span>
+
+                </div>
+
+            </div>
+
+            <!-- GAME SECRETARY-2 -->
+
+            <div class="cm-card">
+
+                <div class="cm-photo">
+
+                    <img
+                        src="images/game-secretary-2.jpg"
+                        alt="Game Secretary-2"
+                    >
+
+                </div>
+
+                <div class="cm-info">
+
+                    <h3>
+                        Mr. Tapas Majumder
+                    </h3>
+                    <h4>
+                        phone number: +91 9874894207
+                    </h4>
+
+                    <span>
+                        Game Secretary-2
+                    </span>
+                </div>
+
+            </div>
+
+            <!-- ASSET MANAGER-1-->
+
+            <div class="cm-card">
+
+                <div class="cm-photo">
+
+                    <img
+                        src="images/asset-manager-1.jpg"
+                        alt="Asset Manager-1"
+                    >
+
+                </div>
+
+                <div class="cm-info">
+
+                    <h3>
+                        Mr. Debrup Chakraborty
+                    </h3>
+                    <h4>
+                        phone number: +91 6290998830
+                    </h4>
+
+                    <span>
+                        Asset Manager-1
+                    </span>
+
+                </div>
+
+            </div>
+
+            <!-- ASSET MANAGER-2 -->
+
+            <div class="cm-card">
+
+                <div class="cm-photo">
+
+                    <img
+                        src="images/asset-manager-2.jpg"
+                        alt="Asset Manager-2"
+                    >
+
+                </div>
+
+                <div class="cm-info">
+
+                    <h3>
+                        Mr. Debangan Bhattacharya
+                    </h3>
+                    <h4>
+                        phone number: +91 6289872719
+                    </h4>
+
+                    <span>
+                        Asset Manager-2
+                    </span>
+
+                </div>
+
+            </div>
+
+            <!-- OXYGEN -->
+
+            <div class="cm-card">
+
+                <div class="cm-photo">
+
+                    <img
+                        src="images/oxygen.jpg"
+                        alt="Oxygen"
+                    >
+
+                </div>
+
+                <div class="cm-info">
+
+                    <h3>
+                        Mr. Sourav Das
+                    </h3>
+                    <h4>
+                        phone number: +91 8240964008
+                    </h4>
+
+                    <span>
+                        Oxygen
+                    </span>
+
+                </div>
+
+            </div>
+
+            <!-- COMMITTEE MEMBER -->
+
+            <div class="cm-card">
+
+                <div class="cm-photo">
+
+                    <img
+                        src="images/committee-member.jpg"
+                        alt="Committee Member"
+                    >
+
+                </div>
+
+                <div class="cm-info">
+
+                    <h3>
+                        Mr. Sumon Biswas
+                    </h3>
+                    <h4>
+                        phone number: +91 984258328
+                    </h4>
+
+                    <span>
+                        Committee member
+                    </span>
+
+                </div>
+
+            </div>
+
+            <!-- COMMITTEE MEMBER -->
+
+            <div class="cm-card">
+
+                <div class="cm-photo">
+
+                    <img
+                        src="images/committee-member.jpg"
+                        alt="Committee Member"
+                    >
+
+                </div>
+
+                <div class="cm-info">
+
+                    <h3>
+                        Mr. Raju Das
+                    </h3>
+                    <h4>
+                        phone number: +91 9051847970
+                    </h4>
+
+                    <span>
+                        Committee member
+                    </span>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- BACK -->
+
+    <div class="cm-back">
+
+        <a href="index.html">
+            ← Back to Home
+        </a>
+
+    </div>
+
+
+
+    <!-- FOOTER -->
+
+    <footer class="cm-footer">
+
+        © 2026 Duttapukur Maitri Sangha.
+        All Rights Reserved.
+
+    </footer>
+
+
+</body>
+</html>

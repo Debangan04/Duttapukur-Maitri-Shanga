@@ -1487,19 +1487,481 @@ footer {
     }
 
 }
-.gallery-btn {
+
+
+/* ==============================
+   COMMITTEE PAGE
+================================ */
+
+.committee-page-header {
+    text-align: center;
+    padding: 80px 20px 50px;
+    background: #f5f7fa;
+}
+
+.committee-page-header p {
+    color: #d4a017;
+    font-weight: 700;
+    letter-spacing: 5px;
+    margin-bottom: 15px;
+}
+
+.committee-page-header h1 {
+    font-size: 52px;
+    color: #062d52;
+    margin: 0 0 15px;
+}
+
+.committee-page-header span {
+    display: block;
+    color: #718096;
+    font-size: 20px;
+}
+
+
+/* MEMBER AREA */
+
+.committee-page {
+    padding: 50px 20px 70px;
+    background: #f5f7fa;
+}
+
+.committee-grid {
+    max-width: 1200px;
+    margin: auto;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+}
+
+
+/* MEMBER CARD */
+
+.member-card {
+    background: white;
+    border-radius: 18px;
+    overflow: hidden;
+
+    text-align: center;
+
+    box-shadow: 0 8px 25px rgba(0,0,0,0.10);
+
+    transition: transform 0.3s ease,
+                box-shadow 0.3s ease;
+}
+
+.member-card:hover {
+    transform: translateY(-8px);
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,0.16);
+}
+
+
+/* MEMBER PHOTO */
+
+.member-photo {
+    width: 100%;
+    height: 300px;
+    background: #e9eef4;
+    overflow: hidden;
+}
+
+.member-photo img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+
+/* NAME / ROLE */
+
+.member-card h3 {
+    margin: 20px 10px 5px;
+
+    color: #062d52;
+    font-size: 23px;
+}
+
+.member-card p {
+    margin: 0 10px 22px;
+
+    color: #718096;
+}
+
+
+/* BACK BUTTON */
+
+.committee-back {
+    text-align: center;
+    padding: 20px 20px 60px;
+    background: #f5f7fa;
+}
+
+.back-btn {
+    display: inline-block;
+
+    padding: 13px 25px;
+
+    background: #062d52;
+    color: white;
+
+    text-decoration: none;
+
+    border-radius: 30px;
+
+    font-weight: 600;
+}
+
+.back-btn:hover {
+    background: #d4a017;
+    color: #111;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 900px) {
+
+    .committee-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .committee-page-header h1 {
+        font-size: 42px;
+    }
+
+}
+
+
+@media (max-width: 550px) {
+
+    .committee-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .committee-page-header {
+        padding: 60px 15px 40px;
+    }
+
+    .committee-page-header h1 {
+        font-size: 36px;
+    }
+
+    .committee-page-header span {
+        font-size: 17px;
+    }
+
+}
+.committee-link-section {
+    text-align: center;
+    padding: 80px 20px;
+    background: #f5f7fa;
+}
+
+.committee-link-section .section-label {
+    color: #d4a017;
+    font-weight: 700;
+    letter-spacing: 4px;
+}
+
+.committee-link-section h2 {
+    color: #062d52;
+    font-size: 42px;
+    margin: 10px 0;
+}
+
+.committee-link-section > p:not(.section-label) {
+    color: #718096;
+    font-size: 18px;
+    margin-bottom: 25px;
+}
+
+.committee-link {
     display: inline-flex;
     align-items: center;
     gap: 8px;
+
+    padding: 14px 25px;
+
+    background: #062d52;
+    color: white;
+
+    border-radius: 30px;
+
+    text-decoration: none;
+    font-weight: 600;
 }
 
+.committee-link:hover {
+    background: #d4a017;
+    color: #111;
+}
+.cm-header {
+    background: #ffffff;
+    min-height: 105px;
+    display: flex;
+    align-items: center;
+    padding: 12px 6%;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.cm-logo {
+    width: 82px;
+    height: 82px;
+    object-fit: contain;
+    margin-right: 18px;
+}
+
+.cm-brand h2 {
+    font-size: 25px;
+    color: #07345b;
+    margin-bottom: 5px;
+}
+
+.cm-brand p {
+    font-size: 13px;
+    color: #8b6a18;
+    letter-spacing: 1.5px;
+}
+
+.cm-nav {
+    background: #07345b;
+    min-height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 0 20px;
+}
+
+.cm-nav a {
+    color: #ffffff;
+    padding: 20px 15px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.cm-nav a:hover,
+.cm-nav a.active {
+    background: #c99b20;
+    color: #ffffff;
+}
+
+/* ==============================
+   GALLERY VIEW BUTTON
+================================ */
+
+.gallery-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    gap: 7px !important;
+
+    padding: 11px 22px !important;
+
+    background: #062d52 !important;
+    color: #ffffff !important;
+
+    border-radius: 30px;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    line-height: 1 !important;
+
+    text-decoration: none;
+
+    box-shadow: 0 4px 12px rgba(6,45,82,.18);
+
+    vertical-align: middle;
+}
+
+
+/* Gallery Icon */
+
 .gallery-btn svg {
-    width: 22px;
-    height: 22px;
+    display: block !important;
+
+    width: 16px !important;
+    height: 16px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    flex: 0 0 16px;
+
     fill: none;
     stroke: currentColor;
     stroke-width: 2;
     stroke-linecap: round;
     stroke-linejoin: round;
-    flex-shrink: 0;
+}
+
+
+/* Hover */
+
+.gallery-btn:hover {
+    background: #d4a017 !important;
+    color: #111 !important;
+
+    transform: translateY(-2px);
+}
+
+/* ===== FINAL GALLERY BUTTON FIX ===== */
+
+.gallery-btn {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    width: fit-content !important;
+    min-width: 210px;
+    height: 48px;
+
+    margin: 0 auto !important;
+
+    padding: 0 22px !important;
+
+    background: #062d52 !important;
+    color: #fff !important;
+
+    border-radius: 30px;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    gap: 8px;
+
+    line-height: normal !important;
+}
+
+
+/* ICON */
+.gallery-btn svg {
+    width: 16px !important;
+    height: 16px !important;
+
+    display: block !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    flex: 0 0 16px !important;
+}
+
+
+/* TEXT */
+.gallery-btn span {
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+
+/* HOVER */
+.gallery-btn:hover {
+    background: #d4a017 !important;
+    color: #111 !important;
+}
+
+/* =================================
+   BACK TO HOME BUTTON
+================================= */
+
+.back-home-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px 20px 40px;
+}
+
+.back-home-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    gap: 8px;
+
+    min-width: 180px;
+    height: 46px;
+
+    padding: 0 22px;
+
+    background: #062d52 !important;
+    color: #ffffff !important;
+
+    border-radius: 30px;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    line-height: 1;
+    text-decoration: none;
+
+    box-shadow: 0 4px 12px rgba(6,45,82,.18);
+
+    transition: .25s ease;
+}
+
+.back-icon {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 16px;
+    height: 16px;
+
+    font-size: 18px;
+    line-height: 1;
+
+    margin: 0;
+    padding: 0;
+}
+
+.back-home-btn:hover {
+    background: #d4a017 !important;
+    color: #111 !important;
+
+    transform: translateY(-2px);
+}
+
+.nav-social {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+}
+
+.nav-social a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    color: #ffffff;
+    font-size: 20px;
+    text-decoration: none;
+    line-height: 1;
+    transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.nav-social a:hover {
+    color: #d4a017;
+    transform: translateY(-2px);
+}
+
+.nav-social a i {
+    display: block;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
 }
