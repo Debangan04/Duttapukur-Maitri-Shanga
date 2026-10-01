@@ -1,198 +1,621 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <title>Events | Duttapukur Maitri Sangha</title>
 
-    <title>Upcoming Events | Duttapukur Maitri Sangha</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
     <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-    <!-- Main Website CSS -->
-    <link rel="stylesheet" href="style.css">
-
-</head>
+    <!-- Events CSS -->
+    <link rel="stylesheet" href="events.css">
 </head>
 
 <body>
 
-    <!-- HEADER -->
-    <header class="cm-header">
+    <!-- ================= HEADER ================= -->
 
-        <img src="images/club-logo.png"
-             alt="Duttapukur Maitri Sangha Logo"
-             class="cm-logo">
+    <header class="brand-header">
 
-        <div class="cm-brand">
-            <h2>Duttapukur Maitri Sangha</h2>
+        <div class="brand-container">
 
-            <p>
-                UNITY • FRIENDSHIP • CULTURE • COMMUNITY SERVICE
-            </p>
+            <a href="index.html" class="brand-logo">
+                <img src="images/logo.png"
+                     alt="Duttapukur Maitri Sangha Logo">
+            </a>
+
+            <div class="brand-text">
+                <h1>Duttapukur Maitri Sangha</h1>
+                <p>Unity • Service • Development</p>
+            </div>
+
         </div>
 
     </header>
 
 
-    <!-- NAVIGATION -->
-    <nav class="cm-nav">
+    <!-- ================= NAVIGATION ================= -->
 
-        <a href="index.html">Home</a>
+    <nav class="main-nav">
 
-        <a href="index.html#about">About</a>
+        <div class="nav-container">
 
-        <a href="index.html#activities">Activities</a>
+            <a href="index.html" class="nav-brand">
+                Duttapukur Maitri Sangha
+            </a>
 
-        <a href="events.html" class="active">Events</a>
+            <button id="mobileToggle" class="mobile-toggle">
+                <i class="fa-solid fa-bars"></i>
+            </button>
 
-        <a href="gallery.html">Gallery</a>
+            <ul id="navLinks" class="nav-links">
 
-        <a href="committee.html">Committee</a>
+                <li>
+                    <a href="index.html">
+                        <i class="fa-solid fa-house"></i>
+                        Home
+                    </a>
+                </li>
 
-        <a href="index.html#notices">Notices</a>
+                <li>
+                    <a href="events.html" class="active">
+                        <i class="fa-solid fa-calendar-days"></i>
+                        Events
+                    </a>
+                </li>
 
-        <a href="index.html#contact">Contact</a>
+                <li>
+                    <a href="gallery.html">
+                        <i class="fa-solid fa-images"></i>
+                        Gallery
+                    </a>
+                </li>
+
+                <li>
+                    <a href="committee.html">
+                        <i class="fa-solid fa-users"></i>
+                        Committee
+                    </a>
+                </li>
+
+                <li>
+                    <a href="index.html#contact">
+                        <i class="fa-solid fa-phone"></i>
+                        Contact
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
 
     </nav>
 
 
-    <!-- EVENTS -->
-    <section class="events-page">
+    <!-- ================= PAGE HERO ================= -->
 
-        <div class="events-heading">
+    <section class="page-hero">
 
-            <span class="events-label">
-                WHAT'S COMING
-            </span>
+        <div class="page-hero-content">
 
-            <h1>Upcoming Events</h1>
+            <span>OUR ACTIVITIES</span>
+
+            <h2>Upcoming Events</h2>
 
             <p>
-                Stay updated with the latest events and activities
+                Stay updated with all upcoming events and activities
                 of Duttapukur Maitri Sangha.
             </p>
-
-        </div>
-
-
-        <div class="add-event-area">
-
-            <button id="addEventBtn"
-                    class="add-event-btn">
-
-                <i class="fa fa-plus"></i>
-
-                Add Event
-
-            </button>
-
-        </div>
-
-
-        <div id="eventsContainer"
-             class="events-container">
-
-        </div>
-
-
-        <!-- BACK TO HOME -->
-
-        <div class="back-home-wrapper">
-
-            <a href="index.html"
-               class="back-home-btn">
-
-                <span>←</span>
-
-                <span>Back to Home</span>
-
-            </a>
 
         </div>
 
     </section>
 
 
-    <!-- ADD EVENT POPUP -->
+    <!-- ================= EVENTS ================= -->
 
-    <div id="eventModal"
-         class="event-modal">
+    <main class="events-section">
 
-        <div class="event-modal-box">
+        <div class="section-heading">
 
-            <button id="closeEventModal"
-                    class="close-event-modal">
+            <span>EVENTS</span>
 
-                ×
+            <h2>Upcoming Events</h2>
 
-            </button>
-
-
-            <h2>Add Upcoming Event</h2>
-
-
-            <form id="eventForm">
-
-                <input
-                    type="text"
-                    id="eventTitle"
-                    placeholder="Event Name"
-                    required
-                >
-
-
-                <input
-                    type="date"
-                    id="eventDate"
-                    required
-                >
-
-
-                <input
-                    type="time"
-                    id="eventTime"
-                >
-
-
-                <input
-                    type="text"
-                    id="eventVenue"
-                    placeholder="Venue"
-                >
-
-
-                <textarea
-                    id="eventDescription"
-                    placeholder="Event Description"
-                    rows="4"
-                ></textarea>
-
-
-                <button
-                    type="submit"
-                    class="save-event-btn">
-
-                    <i class="fa fa-check"></i>
-
-                    Save Event
-
-                </button>
-
-            </form>
+            <p>
+                Join us and be a part of our community activities.
+            </p>
 
         </div>
 
-    </div>
+
+        <!-- Loading -->
+
+        <div id="loading" class="loading">
+
+            <i class="fa-solid fa-spinner fa-spin"></i>
+
+            <p>Loading events...</p>
+
+        </div>
 
 
-    <!-- EVENTS JAVASCRIPT -->
+        <!-- Error -->
 
-    <script src="events.js"></script>
+        <div id="errorMessage" class="message error-message">
+
+            <i class="fa-solid fa-circle-exclamation"></i>
+
+            <p>
+                Unable to load events. Please try again later.
+            </p>
+
+        </div>
+
+
+        <!-- No Events -->
+
+        <div id="noEvents" class="message no-events">
+
+            <i class="fa-regular fa-calendar-xmark"></i>
+
+            <h3>No Upcoming Events</h3>
+
+            <p>
+                New events will appear here soon.
+            </p>
+
+        </div>
+
+
+        <!-- Event Cards -->
+
+        <div id="eventsContainer" class="events-grid"></div>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+
+        <p>
+            © <span id="year"></span>
+            Duttapukur Maitri Sangha.
+            All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        /*
+         * PUT YOUR GOOGLE APPS SCRIPT WEB APP URL HERE
+         */
+
+        const API_URL =
+            "https://script.google.com/macros/s/AKfycbwXh2YWxeVeIYs7VdPqGyiwAQIn_7vro7iBpyw_EsVGTMDuBJgg9UaTP6LU7o6qKss5/execYOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL";
+
+
+        const eventsContainer =
+            document.getElementById("eventsContainer");
+
+        const loading =
+            document.getElementById("loading");
+
+        const errorMessage =
+            document.getElementById("errorMessage");
+
+        const noEvents =
+            document.getElementById("noEvents");
+
+
+        // ================= LOAD EVENTS =================
+
+        async function loadEvents() {
+
+            loading.style.display = "flex";
+            errorMessage.style.display = "none";
+            noEvents.style.display = "none";
+            eventsContainer.innerHTML = "";
+
+
+            try {
+
+                const response =
+                    await fetch(API_URL);
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Failed to load events"
+                    );
+
+                }
+
+
+                const events =
+                    await response.json();
+
+
+                loading.style.display = "none";
+
+
+                if (!Array.isArray(events) ||
+                    events.length === 0) {
+
+                    noEvents.style.display = "flex";
+
+                    return;
+
+                }
+
+
+                events.forEach(event => {
+
+                    createEventCard(event);
+
+                });
+
+
+            }
+
+            catch (error) {
+
+                console.error(error);
+
+                loading.style.display = "none";
+
+                errorMessage.style.display = "flex";
+
+            }
+
+        }
+
+
+        // ================= CREATE EVENT CARD =================
+
+        function createEventCard(event) {
+
+            const card =
+                document.createElement("article");
+
+            card.className = "event-card";
+
+
+            // Image
+
+            const image =
+                document.createElement("img");
+
+            image.className = "event-image";
+
+
+            if (event.image &&
+                event.image.trim() !== "") {
+
+                image.src =
+                    convertDriveUrl(event.image);
+
+            }
+            else {
+
+                image.src =
+                    "images/event-placeholder.jpg";
+
+            }
+
+
+            image.alt =
+                event.eventName || "Event";
+
+
+            image.onerror = function () {
+
+                this.src =
+                    "images/event-placeholder.jpg";
+
+            };
+
+
+            // Content
+
+            const content =
+                document.createElement("div");
+
+            content.className = "event-content";
+
+
+            // Event title
+
+            const title =
+                document.createElement("h3");
+
+            title.textContent =
+                event.eventName || "Event";
+
+
+            // Details
+
+            const details =
+                document.createElement("div");
+
+            details.className = "event-details";
+
+
+            if (event.date) {
+
+                const date =
+                    document.createElement("div");
+
+                date.innerHTML =
+                    `<i class="fa-regular fa-calendar"></i>
+                     <span>${formatDate(event.date)}</span>`;
+
+                details.appendChild(date);
+
+            }
+
+
+            if (event.time) {
+
+                const time =
+                    document.createElement("div");
+
+                time.innerHTML =
+                    `<i class="fa-regular fa-clock"></i>
+                     <span>${escapeHtml(event.time)}</span>`;
+
+                details.appendChild(time);
+
+            }
+
+
+            if (event.location) {
+
+                const location =
+                    document.createElement("div");
+
+                location.innerHTML =
+                    `<i class="fa-solid fa-location-dot"></i>
+                     <span>${escapeHtml(event.location)}</span>`;
+
+                details.appendChild(location);
+
+            }
+
+
+            // Description
+
+            const description =
+                document.createElement("p");
+
+            description.className =
+                "event-description";
+
+            description.textContent =
+                event.description || "";
+
+
+            // Assemble
+
+            content.appendChild(title);
+
+            content.appendChild(details);
+
+            if (event.description) {
+
+                content.appendChild(description);
+
+            }
+
+
+            card.appendChild(image);
+
+            card.appendChild(content);
+
+
+            eventsContainer.appendChild(card);
+
+        }
+
+
+        // ================= DATE FORMAT =================
+
+        function formatDate(value) {
+
+            if (!value) return "";
+
+            const date =
+                new Date(value);
+
+
+            if (isNaN(date.getTime())) {
+
+                return escapeHtml(value);
+
+            }
+
+
+            return date.toLocaleDateString(
+                "en-IN",
+                {
+                    day: "2-digit",
+                    month: "long",
+                    year: "numeric"
+                }
+            );
+
+        }
+
+
+        // ================= GOOGLE DRIVE IMAGE =================
+
+        function convertDriveUrl(url) {
+
+            if (!url) return "";
+
+            url = url.trim();
+
+
+            /*
+             * Google Drive file ID
+             */
+
+            let fileId = "";
+
+
+            const match =
+                url.match(
+                    /\/d\/([a-zA-Z0-9_-]+)/
+                );
+
+
+            if (match) {
+
+                fileId = match[1];
+
+            }
+
+
+            if (!fileId) {
+
+                const idMatch =
+                    url.match(
+                        /[?&]id=([a-zA-Z0-9_-]+)/
+                    );
+
+                if (idMatch) {
+
+                    fileId =
+                        idMatch[1];
+
+                }
+
+            }
+
+
+            if (fileId) {
+
+                return `https://drive.google.com/thumbnail?id=${fileId}&sz=w1200`;
+
+            }
+
+
+            return url;
+
+        }
+
+
+        // ================= SECURITY =================
+
+        function escapeHtml(text) {
+
+            const div =
+                document.createElement("div");
+
+            div.textContent =
+                text ?? "";
+
+            return div.innerHTML;
+
+        }
+
+
+        // ================= MOBILE MENU =================
+
+        const mobileToggle =
+            document.getElementById(
+                "mobileToggle"
+            );
+
+        const navLinks =
+            document.getElementById(
+                "navLinks"
+            );
+
+
+        mobileToggle.addEventListener(
+            "click",
+            function () {
+
+                navLinks.classList.toggle(
+                    "open"
+                );
+
+
+                const icon =
+                    this.querySelector("i");
+
+
+                icon.classList.toggle(
+                    "fa-bars"
+                );
+
+                icon.classList.toggle(
+                    "fa-xmark"
+                );
+
+            }
+        );
+
+
+        document.querySelectorAll(
+            ".nav-links a"
+        ).forEach(link => {
+
+            link.addEventListener(
+                "click",
+                function () {
+
+                    navLinks.classList.remove(
+                        "open"
+                    );
+
+                    const icon =
+                        mobileToggle.querySelector(
+                            "i"
+                        );
+
+                    icon.classList.remove(
+                        "fa-xmark"
+                    );
+
+                    icon.classList.add(
+                        "fa-bars"
+                    );
+
+                }
+            );
+
+        });
+
+
+        // ================= YEAR =================
+
+        document.getElementById("year")
+            .textContent =
+            new Date().getFullYear();
+
+
+        // ================= START =================
+
+        loadEvents();
+
+    </script>
 
 </body>
 </html>

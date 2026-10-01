@@ -192,3 +192,13 @@ function deleteEvent(id) {
 
 // Initial display
 displayEvents();
+const API_URL = "https://script.google.com/macros/s/AKfycbxB1vg6S5J2BlnRuwXdXxmGucmK8sZmTVX9M4Y1nhUJ-ISIizRsXTrS2Zj_a2VHWWI0/exec";
+
+fetch(API_URL)
+  .then(response => response.json())
+  .then(events => {
+    console.log(events);
+  })
+  .catch(error => {
+    console.error("Event loading error:", error);
+  });
