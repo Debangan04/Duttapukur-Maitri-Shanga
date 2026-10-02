@@ -192,13 +192,80 @@ function deleteEvent(id) {
 
 // Initial display
 displayEvents();
-const API_URL = "https://script.google.com/macros/s/AKfycbxB1vg6S5J2BlnRuwXdXxmGucmK8sZmTVX9M4Y1nhUJ-ISIizRsXTrS2Zj_a2VHWWI0/exec";
+const API_URL =
+  "https://script.google.com/macros/s/AKfycbyvrfcGP7j3CCzg1UbvmSGx_T-9QhzynLBEdFx4alD2RxaX2P_GJjjaimysO6ueLohl/exec";
 
-fetch(API_URL)
-  .then(response => response.json())
-  .then(events => {
-    console.log(events);
-  })
-  .catch(error => {
-    console.error("Event loading error:", error);
-  });
+async function loadEvents() {
+
+  const container = document.getElementById("eventsContainer");
+
+  try {
+
+    const response = await fetch(API_URL);
+
+    if (!response.ok) {
+      throw new Error("Network response failed");
+    }
+
+    const events = await response.json();
+
+    container.innerHTML = "";
+
+    if (!events.length) {
+      container.innerHTML =
+        "<p>No upcoming events available.</p>";
+      return;
+    }
+
+    events.forEach(event => {
+
+      const card = document.createElement("div");
+
+      card.className = "event-card";
+
+      card.innerHTML = `
+        <h3>${event.eventName}</h3>
+
+        <p>
+          <strong>Date:</strong>
+          ${event.date}
+        </p>
+
+        <p>
+          <strong>Time:</strong>
+          ${event.time}
+        </p>
+
+        <p>
+          <strong>Venue:</strong>
+          ${event.venue}
+        </p>
+
+        <p>
+          ${event.description}
+        </p>
+
+        <p>
+          <strong>Contact:</strong>
+          ${event.contact}
+        </p>
+      `;
+
+      container.appendChild(card);
+
+    });
+
+  } catch (error) {
+
+    console.error(error);
+
+    container.innerHTML = `
+      <p class="event-error">
+        Unable to load events. Please try again later.
+      </p>
+    `;
+  }
+}
+
+document.addEventListener("DOMContentLoaded", loadEvents);
+<script src="events.js"></script>
